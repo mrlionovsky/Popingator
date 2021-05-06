@@ -1,0 +1,314 @@
+Make(delphi)
+ver(4.05 build 186)
+Add(MainForm,2953706,14,140)
+{
+ Width=420
+ Height=374
+ Caption="Попингатор 1.0"
+ BorderStyle=1
+ Icon=[ZIPBE08000078DAB594B16E13411086273A845311A54114118E5C51224D8B9420F915FC0034FB0AD9EA6251F10ADBA54008F10A344E8BAED8072092230A5A97968818BED98D639F13832872E7CF7737FFECDC7FB37B27B2C77E7C2C65FBBC2FF29CE32BF0D029ECC97ED1A64F64C7362D3F994EEBC1774E66B399CCBECF64F1ED9374669220808275261D2408A0409258220E09022830502C10870401142826A6C421410005F1981083000A661DE53B4A750CAB2860841F1A2408A040002FC42141000592F0421C12045060205E884382000A141377E37B82000AE20E8D082408A0C04DF1431C120450C0081271481040810BFC108704011448C00F714810408141A533EEC6F7000AE2DD32DC4182000A14C70F71481040811BE287382408A0800986108704011438C10F7148104001B1CC52579C84B22B88CF9CD1294810408122F8210E09022850183FC4214100056E861FE2902080020628451C120450E0AFAC98AE74458B1BDFC5637529FAB2F325E64BC797892F099F7E9F6A9F569F429F2E9F1A9F066FB9B7D75BE96DF316793BFC11FDF1FD91DCBE5B755B6EC16F575649AA69C581C8157C852FF001CE60026318FD5BBEBA92C9642267676785F1782CA3D1480E0F0FB75365F1CBE4E3C505EFB1BFD1567EE2EF6DB9F2F7C92F6DEB3BD034ED8E2F441B63F4845D7A6EDB36563DD6D40713D039B68307131A97C40FF1E15B9404FFBB672DC6F6566BB6D45C85A666345EBC67B0EA452ADBEA729D93EB564737EBADEFB2D6AE7FABFC8D84A69A6FBD428D7B4E5CCB2871C023C67276BF796EBC753DDF4FB895A5E8DEA7AD84BCEA69D165BB42BEEB5AAE42EECF415ECBB7037B09F96E4AD6853713BC1359FAFAA6C9BC92FBC6EE1A9857F296F155FF72EE398DB27B7B7CBD6D45FE9A101F55972CFFA7DBCDB9D93378FACEECFDA9D9ECADD9BCB1B91C185F0EE7602E32E0A431692E7FCB9EDD105FEE1F9F2F8F5E9F2CDEBC182EE2D1C13CBE1CCC97C3E67A39BCFCB11C5EFFBC199AF53831FBBD819D17FE0097606565]
+ Position=1
+ link(onCreate,2416590:doEvent2,[(46,790)(497,790)])
+}
+Add(Ping,11556732,315,175)
+{
+ Point(Time)
+ Point(ByteCount)
+ link(onFind,11599482:doEvent1,[(369,181)(369,174)])
+ link(onFailed,15516889:doEvent1,[(352,188)(352,139)])
+ link(Name,13364078:Text,[(321,145)(118,145)])
+}
+Add(Label,11448270,70,84)
+{
+ Left=10
+ Top=15
+ Width=55
+ Height=17
+ Caption="Имя узла:"
+}
+Add(Edit,13364078,112,84)
+{
+ Left=65
+ Top=15
+ Width=225
+ Hint="Домен или IP-адрес (без http!!!!!)"
+ Text="localhost"
+}
+Add(Button,378870,155,84)
+{
+ Left=300
+ Top=15
+ Width=60
+ Caption="GO"
+ link(onClick,3989589:doEvent1,[(209,90)(209,160)])
+}
+Add(Label,8150119,133,378)
+{
+ Left=10
+ Top=75
+ Width=75
+ Height=17
+ Caption="Статус запроса"
+}
+Add(RichEdit,5095290,273,295)
+{
+ Left=10
+ Top=100
+ Width=390
+ Height=205
+ ScrollBars=2
+ ReadOnly=0
+}
+Add(StrCatDelim,2268590,455,238)
+{
+ Str2=" мсек ("
+ Point(Delimiter)
+ link(onStrCatDlm,4443201:doStrCatDlm,[(530,244)(530,244)])
+ link(Str1,15806908:Result,[(461,220)(427,220)(427,272)(381,272)])
+ link(Delimiter,11556732:Time,[(463,216)(321,216)])
+}
+Add(StrCatDelim,15806908,375,235)
+{
+ Str1="Обменн данными размером "
+ Str2=" байт, время ответа - "
+ Point(Delimiter)
+ link(onStrCatDlm,2268590:doStrCatDlm,[(431,241)(431,244)])
+ link(Delimiter,11556732:ByteCount,[(395,227)(328,227)])
+}
+Add(Time,14654038,518,154)
+{
+}
+Add(StrCatDelim,4443201,546,238)
+{
+ Str1="("
+ Str2=")"
+ Point(Delimiter)
+ link(onStrCatDlm,3878595:doValue,[(594,244)(594,251)])
+ link(Str1,12358021:Var3,[(552,226)])
+ link(Delimiter,14654038:FormatTime,[(566,212)(524,212)])
+}
+Add(StrCatDelim,13774742,357,63)
+{
+ Str1="Хост не ответил вовремя - "
+ Point(Delimiter)
+ link(onStrCatDlm,5721467:doValue,[(425,69)(425,97)])
+ link(Delimiter,3715234:FormatTime,[(377,61)(419,61)])
+}
+Add(Time,3715234,413,14)
+{
+}
+Add(Hub,11390766,175,294)
+{
+ InCount=4
+ OutCount=1
+ link(onEvent1,5095290:doAdd,[(264,300)(264,301)])
+}
+Add(Memory,5721467,448,91)
+{
+ Default=Integer(0)
+ Point(Data)
+ link(onData,11390766:doEvent1,[(494,97)(494,192)(163,192)(163,300)])
+ link(Data,13774742:Result,[(463,77)(416,77)(416,107)(363,107)])
+}
+Add(Memory,3878595,637,245)
+{
+ Default=Integer(0)
+ Point(Data)
+ link(onData,11390766:doEvent2,[(681,251)(681,279)(155,279)(155,307)])
+ link(Data,4443201:Result,[(643,233)(583,233)(583,282)(552,282)])
+}
+Add(Hub,15516889,357,133)
+{
+ link(onEvent1,13774742:doStrCatDlm,[(394,139)(394,100)(346,100)(346,69)])
+ link(onEvent2,12605419:doOff,[(383,146)(383,104)(191,104)(191,63)])
+}
+Add(LED,12605419,203,50)
+{
+ Left=370
+ Top=15
+ Hint="Доступность ресурса"
+}
+Add(Hub,11599482,392,168)
+{
+ link(onEvent1,12605419:doOn,[(418,174)(418,122)(191,122)(191,70)])
+ link(onEvent2,15806908:doStrCatDlm,[(418,181)(418,211)(363,211)(363,241)])
+}
+Add(Edit,16666468,77,378)
+{
+ Left=125
+ Top=45
+ Width=36
+ Hint="1-999 секунд"
+ SizeSp=3
+ Text=""
+ MaxLenField=3
+ Point(doMaxLenField)
+ link(onChange,12478704:doOperation,[(119,384)(119,538)])
+}
+Add(MMTimer,8798599,161,441)
+{
+ Enable=1
+ Point(doInterval)
+ link(onTimer,3989589:doEvent2,[(212,447)(212,167)])
+}
+Add(Label,14142889,7,378)
+{
+ Left=10
+ Top=45
+ Width=110
+ Height=17
+ Caption="Пинговать каждые"
+}
+Add(Label,2121434,154,42)
+{
+ Left=170
+ Top=45
+ Width=39
+ Height=17
+ Caption="секунд"
+}
+Add(Button,5826435,188,375)
+{
+ Left=230
+ Top=45
+ Width=60
+ Caption="GO"
+ Point(doVisible)
+ link(onClick,16258478:doEvent1,[(226,381)(226,363)])
+}
+Add(Hub,3989589,231,154)
+{
+ InCount=2
+ OutCount=1
+ link(onEvent1,11556732:doPing,[(280,160)(280,181)])
+}
+Add(Button,4135773,281,376)
+{
+ Left=300
+ Top=45
+ Width=60
+ Caption="STOP"
+ link(onClick,14626974:doEvent1,[(331,382)(331,384)])
+}
+Add(Math,12478704,231,532)
+{
+ OpType=2
+ Op2=1000
+ link(onResult,16135686:doCompare,[(275,538)(275,496)])
+}
+Add(StrCatDelim,2504520,343,581)
+{
+ Str1="Пингуем узел каждые "
+ Str2=" мсек ("
+ Point(Delimiter)
+ link(onStrCatDlm,2557173:doStrCatDlm,[(394,587)(394,619)(359,619)(359,650)])
+ link(Delimiter,12478704:Result,[(363,573)(237,573)])
+}
+Add(Hub,16258478,231,357)
+{
+ link(onEvent1,2504520:doStrCatDlm,[(294,363)(294,587)])
+ link(onEvent2,8798599:doTimer,[(257,370)(257,408)(149,408)(149,447)])
+}
+Add(If_else,16135686,287,490)
+{
+ Op2=Integer(0)
+ link(onTrue,12194203:doEvent1,[(408,496)(408,482)])
+ link(onFalse,8798599:doInterval,[(331,503)(331,482)(149,482)(149,461)])
+}
+Add(Message,798713,525,476)
+{
+ Message="Ну нельзя сюда ставить менее 1 секунды. Вы что, таки хотите устроить дудос?"
+ Caption="Ошибка"
+ Icon=1
+}
+Add(Hub,12194203,483,476)
+{
+ link(onEvent1,798713:doMessage,[])
+ link(onEvent2,2416590:doEvent1,[(509,489)(509,503)(485,503)(485,517)])
+}
+Add(StrCatDelim,7407930,525,525)
+{
+ Str2="1"
+ Point(Delimiter)
+ link(onStrCatDlm,16666468:doText,[(569,531)(569,457)(65,457)(65,384)])
+}
+Add(LED,3374234,476,378)
+{
+ Left=370
+ Top=45
+ Hint="Статус цикловой операции"
+ ColorOn=65280
+ ColorOff=8421376
+}
+Add(Hub,2416590,497,511)
+{
+ InCount=2
+ link(onEvent2,7407930:doStrCatDlm,[(518,524)(518,531)])
+}
+Add(InfoTip,14540780,455,427)
+{
+ Info=#56:Костыль для нормальной установки мессджбокса при запуске|
+ Width=267
+ Height=172
+}
+Add(StrCatDelim,7146614,378,378)
+{
+ Str1="Нажата кнопка "стоп" ("
+ Str2=")"
+ Point(Delimiter)
+ link(onStrCatDlm,11390766:doEvent4,[(422,384)(422,352)(163,352)(163,321)])
+ link(Delimiter,751606:FormatTime,[(398,366)(377,366)])
+}
+Add(Time,751606,371,315)
+{
+}
+Add(Hub,14626974,336,378)
+{
+ OutCount=3
+ link(onEvent1,7146614:doStrCatDlm,[])
+ link(onEvent2,8798599:doStop,[(369,391)(369,421)(156,421)(156,454)])
+ link(onEvent3,3374234:doOff,[(413,398)(413,391)])
+}
+Add(Time,14317462,413,595)
+{
+}
+Add(StrCatDelim,2557173,371,644)
+{
+ Str2=")"
+ Point(Delimiter)
+ link(onStrCatDlm,10923105:doEvent1,[(411,650)(411,545)])
+ link(Str1,2504520:Result,[(377,628)(349,628)])
+ link(Delimiter,14317462:FormatTime,[(391,636)(419,636)])
+}
+Add(Hub,10923105,420,539)
+{
+ link(onEvent1,11390766:doEvent3,[(446,545)(446,429)(163,429)(163,314)])
+ link(onEvent2,3374234:doOn,[(455,552)(455,398)])
+}
+Add(Button,10860644,14,280)
+{
+ Left=10
+ Top=315
+ Width=285
+ Caption="Очистить консоль!"
+ link(onClick,5095290:doClear,[(160,286)(160,308)])
+}
+Add(Button,13788903,529,305)
+{
+ Left=305
+ Top=315
+ Width=95
+ Caption="О программе"
+ link(onClick,5036986:doMessage,[(575,311)(575,314)])
+}
+Add(Message,5036986,588,308)
+{
+ Message="(c) Lionovsky.us, 2018. \r\n\r\nПрограмма-попингатор, которая служит для пингования \r\nзаданного ресурса в течении определённого времени. "
+ Icon=4
+ DefButton=2
+}
+Add(GetDataEx,12358021,518,221)
+{
+ Angle=3
+ link(Data,2268590:Result,[(492,226)(492,282)(461,282)])
+}
